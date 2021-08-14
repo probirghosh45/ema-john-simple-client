@@ -47,5 +47,5 @@
   "main": "index.js",
   "license": "MIT",
   "author": "Probir Ghosh",
-  "repository": "https://github.com/probirghosh45/ema-john-simple-with-auth.git"
+  "repository": "https://github.com/probirghosh45/ema-john-simple-client.git"
 }
