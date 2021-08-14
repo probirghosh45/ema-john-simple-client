@@ -1,16 +1,28 @@
 import React, { useState,useEffect } from "react";
 import { Link } from "react-router-dom";
-import fakeData from "../../fakeData";
+// import fakeData from "../../fakeData";
 import { addToDatabaseCart,getDatabaseCart } from "../../utilities/databaseManager";
 import Cart from "../Cart/Cart";
 import Product from "../Product/Product";
 import './Shop.css';
 const Shop = () => {
-  const product10 = fakeData.slice(0, 10);
+  // const product10 = fakeData.slice(0, 10);
   //  console.log(product10)
-  const [products, setProducts] = useState(product10);
+  const [products, setProducts] = useState([]);
   const [cart, setCart] = useState([])  // "[]"  blank array rekhlam karon initial stage a cart 0 product thakleo add product korla new new product array akare store hobe  
 //  console.log(products);
+
+ 
+  useEffect(() => {
+    fetch('http://localhost:8000/products')
+    .then(res=>res.json())
+    .then(data=>setProducts(data))
+  }, [])
+  
+
+
+
+
 
 
  //==========================> order summary manage without quantity <========================== 
@@ -61,13 +73,17 @@ const handleClick = (product) =>{
 useEffect(()=>{
   const savedCart = getDatabaseCart();
   const productKeys = Object.keys(savedCart);
-  const previousCart = productKeys.map( existingKey => {
-      const product = fakeData.find( pd => pd.key === existingKey);
+  console.log(products,productKeys);
+
+  if(products.length > 0){
+    const previousCart = productKeys.map( existingKey => {
+      const product = products.find( pd => pd.key === existingKey);
       product.quantity = savedCart[existingKey];
       return product;
-  } )
+   } )
   setCart(previousCart);
-}, [])
+  }
+}, [products])
 
 
 

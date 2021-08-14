@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { getDatabaseCart, removeFromDatabaseCart } from "../../utilities/databaseManager";
-import fakeData from "../../fakeData";
+// import fakeData from "../../fakeData";
 import ReviewItem from "../ReviewItem/ReviewItem";
 import Cart from "../Cart/Cart"
 import './Review.css'
@@ -13,18 +13,19 @@ const Review = () => {
     console.log(restoreCartData);
     const productKeys = Object.keys(restoreCartData);
     console.log(productKeys);
-    const cartProducts = productKeys.map((key) => {
-      const product = fakeData.find((productItem) => productItem.key === key);
-      product.quantity = restoreCartData[key];
-      return product;
-    });
+    
+    fetch('http://localhost:8000/productsByKeys',{
+      method: 'POST',
+      headers:{
+       'Content-Type': 'application-json'
+      },
+      body:JSON.stringify(productKeys)
+    })
+    .then(res=>res.json())
+    .then(data=>setCart(data))
+  },[]);
+  
 
-    console.log(cartProducts);
-    setCart(cartProducts);
-  },
-  
-  
-  []);
 
   // =================================> Product Remove from Review Page <===========================================
   
