@@ -12,7 +12,7 @@ import Inventory from "./components/Inventory/Inventory";
 import NoMatch from "./components/NoMatch/NoMatch";
 import ProductDetails from "./components/ProductDetails/ProductDetails";
 import Login from "./components/Login/Login";
-import Shipment from "./Shipment/Shipment";
+import Shipment from "./components/Shipment/Shipment";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 export const UserContext = createContext();
 
