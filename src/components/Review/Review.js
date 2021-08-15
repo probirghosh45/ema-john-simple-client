@@ -5,26 +5,28 @@ import ReviewItem from "../ReviewItem/ReviewItem";
 import Cart from "../Cart/Cart"
 import './Review.css'
 import { useHistory } from "react-router-dom";
+
+
 const Review = () => {
   const [cart, setCart] = useState([]);
   const history=useHistory();
-  useEffect(() => {
-    const restoreCartData = getDatabaseCart();
-    console.log(restoreCartData);
-    const productKeys = Object.keys(restoreCartData);
-    console.log(productKeys);
-    
-    fetch('http://localhost:8000/productsByKeys',{
-      method: 'POST',
-      headers:{
-       'Content-Type': 'application-json'
-      },
-      body:JSON.stringify(productKeys)
+
+  useEffect(()=>{
+    //cart
+    const savedCart = getDatabaseCart();
+    const productKeys = Object.keys(savedCart);
+
+    fetch('http://localhost:8000/productsByKeys', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(productKeys)
     })
-    .then(res=>res.json())
-    .then(data=>setCart(data))
-  },[]);
-  
+    .then(res => res.json())
+    .then(data => setCart(data))
+}, []);
+
 
 
   // =================================> Product Remove from Review Page <===========================================

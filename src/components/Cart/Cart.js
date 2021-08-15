@@ -6,7 +6,7 @@ const Cart = (props) => {
    console.log(props);
     // const total = cart.reduce((total,productPrice)=>total+productPrice.price,0);
     // const total = cart.reduce((total,productIdentity)=>total+productIdentity.price*productIdentity.quantity,0);
-    debugger;
+    // debugger;
 
     // let total = 0;
     // for(let i = 0; i< cart.length; i++){
@@ -18,8 +18,8 @@ const Cart = (props) => {
     let total = 0;
     for(let i = 0; i< cart.length; i++){
         const product = cart[i];
-        total = total + product.price*product.quantity;
-        // debugger;
+        console.log(product.price, product.quantity)
+        total = total + product.price * product.quantity || 1; //Total price not working
     }
 
 
